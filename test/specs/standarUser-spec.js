@@ -3,6 +3,7 @@ import ProductPage from '../pageobjects/products.page';
 import CartPage from '../pageobjects/cart.page';
 import CheckoutPage from '../pageobjects/checkout.page';
 import SideBarPage from '../pageobjects/sidebar.page';
+import OverviewPage from '../pageobjects/overview.page';
 
 describe('Standar user path testing', () => {
   beforeAll('Open browser', () => {
@@ -134,5 +135,12 @@ describe('Standar user path testing', () => {
   it('Complete purchase', async () => {
     await CartPage.checkoutBtn.click();
     await CheckoutPage.completePurchase('juan', 'bonelli', '2900');
+  });
+
+  it('Finish the purchase', async () => {
+    await expect(OverviewPage.paymentinfo).toBeDisplayed();
+    await expect(OverviewPage.shipInfo).toBeDisplayed();
+    await expect(OverviewPage.FinishBtn).toBeClickable();
+    await expect(OverviewPage.cancelBtn).toBeClickable();
   });
 });
