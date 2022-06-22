@@ -3,7 +3,7 @@ import ProductPage from '../pageobjects/products.page';
 import CartPage from '../pageobjects/cart.page';
 import CheckoutPage from '../pageobjects/checkout.page';
 
-describe('Standard user path testing', () => {
+describe('Locked out user path testing', () => {
   beforeAll('Open browser', () => {
     browser.url('https://www.saucedemo.com/');
   });

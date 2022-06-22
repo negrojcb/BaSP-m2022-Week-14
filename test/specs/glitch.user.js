@@ -3,7 +3,7 @@ import ProductPage from '../pageobjects/products.page';
 import CartPage from '../pageobjects/cart.page';
 import CheckoutPage from '../pageobjects/checkout.page';
 
-describe('Problem user path testing', () => {
+describe('Performance glitch user path testing', () => {
   beforeAll('Open browser', () => {
     browser.url('https://www.saucedemo.com/');
   });
@@ -17,14 +17,14 @@ describe('Problem user path testing', () => {
   });
 
   it('Successful login', async () => {
-    await LoginPage.login('problem_user', 'secret_sauce');
+    await LoginPage.login('performance_glitch_user', 'secret_sauce');
   });
 
   it('Load inventory item list', async () => {
     await expect(ProductPage.inventoryList).toBeDisplayed();
   });
 
-  it('burgerMenu is display and clickable', async () => {
+  it('Burger menu is display and clickable', async () => {
     await expect(ProductPage.menuBtn).toBeDisplayed();
     await expect(ProductPage.menuBtn).toBeClickable();
   });
@@ -35,11 +35,6 @@ describe('Problem user path testing', () => {
 
   it('Product filter', async () => {
     await expect(ProductPage.productFilter).toBeDisplayed();
-  });
-
-  it('Page should be refreshed', async () => {
-    await browser.refresh();
-    await browser.pause(800);
   });
 
   it('Cart link button is displayed', async () => {
@@ -77,31 +72,31 @@ describe('Problem user path testing', () => {
     await CartPage.checkoutBtn.click();
   });
 
-  //   it('Complete purchase, empty first name field', async () => {
-  //     await CheckoutPage.completePurchase('', 'landa', '3000');
-  //     await expect(CheckoutPage.errorContainer).toHaveText('Error: First Name is required');
-  //     await CheckoutPage.xBtn.click();
-  //     await CheckoutPage.cancelBtn.click();
-  //   });
+  it('Complete purchase, empty first name field', async () => {
+    await CheckoutPage.completePurchase('', 'landa', '3000');
+    await expect(CheckoutPage.errorContainer).toHaveText('Error: First Name is required');
+    await CheckoutPage.xBtn.click();
+    await CheckoutPage.cancelBtn.click();
+  });
 
-  //   it('Complete purchase, empty last name field', async () => {
-  //     await CartPage.checkoutBtn.click();
-  //     await CheckoutPage.completePurchase('lalo', '', '3000');
-  //     await expect(CheckoutPage.errorContainer).toHaveText('Error: Last Name is required');
-  //     await CheckoutPage.xBtn.click();
-  //     await CheckoutPage.cancelBtn.click();
-  //   });
+  it('Complete purchase, empty last name field', async () => {
+    await CartPage.checkoutBtn.click();
+    await CheckoutPage.completePurchase('lalo', '', '3000');
+    await expect(CheckoutPage.errorContainer).toHaveText('Error: Last Name is required');
+    await CheckoutPage.xBtn.click();
+    await CheckoutPage.cancelBtn.click();
+  });
 
-  //   it('Complete purchase, empty zip code field', async () => {
-  //     await CartPage.checkoutBtn.click();
-  //     await CheckoutPage.completePurchase('lalo', 'landa', '');
-  //     await expect(CheckoutPage.errorContainer).toHaveText('Error: Postal Code is required');
-  //     await CheckoutPage.xBtn.click();
-  //     await CheckoutPage.cancelBtn.click();
-  //   });
+  it('Complete purchase, empty zip code field', async () => {
+    await CartPage.checkoutBtn.click();
+    await CheckoutPage.completePurchase('lalo', 'landa', '');
+    await expect(CheckoutPage.errorContainer).toHaveText('Error: Postal Code is required');
+    await CheckoutPage.xBtn.click();
+    await CheckoutPage.cancelBtn.click();
+  });
 
-  //   it('Complete purchase', async () => {
-  //     await CartPage.checkoutBtn.click();
-  //     await CheckoutPage.completePurchase('juan', 'bonelli', '2900');
-  //   });
+  it('Complete purchase', async () => {
+    await CartPage.checkoutBtn.click();
+    await CheckoutPage.completePurchase('juan', 'bonelli', '2900');
+  });
 });
