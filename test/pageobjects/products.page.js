@@ -39,7 +39,7 @@ class ProductPage {
 
   async ShowSidebar() {
     await this.menuBtn.click();
-    await this.closeSidebarBtn.click();
+    //await this.closeSidebarBtn.click();
   }
 
   async GoToCart() {

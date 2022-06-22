@@ -2,8 +2,9 @@ import LoginPage from '../pageobjects/login.page';
 import ProductPage from '../pageobjects/products.page';
 import CartPage from '../pageobjects/cart.page';
 import CheckoutPage from '../pageobjects/checkout.page';
+import SideBarPage from '../pageobjects/sidebar.page';
 
-describe('Locked out user path testing', () => {
+describe('Standar user path testing', () => {
   beforeAll('Open browser', () => {
     browser.url('https://www.saucedemo.com/');
   });
@@ -72,8 +73,16 @@ describe('Locked out user path testing', () => {
     await expect(ProductPage.cartLink).toBeClickable();
   });
 
-  it('Show sidebar', async () => {
+  it('Sidebar test', async () => {
     await ProductPage.ShowSidebar();
+    await expect(SideBarPage.allItems).toBeDisplayed();
+    await expect(SideBarPage.allItems).toBeFocused();
+    await expect(SideBarPage.allItems).toBeClickable();
+    await expect(SideBarPage.about).toBeDisplayed();
+    await expect(SideBarPage.about).toBeClickable();
+    await expect(SideBarPage.about).toHaveHref('https://saucelabs.com/');
+    await expect(SideBarPage.logOut).toBeClickable();
+    await expect(SideBarPage.resetApp).toBeClickable();
   });
 
   it('Page should be refreshed', async () => {

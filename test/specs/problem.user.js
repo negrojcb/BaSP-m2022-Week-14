@@ -2,6 +2,7 @@ import LoginPage from '../pageobjects/login.page';
 import ProductPage from '../pageobjects/products.page';
 import CartPage from '../pageobjects/cart.page';
 import CheckoutPage from '../pageobjects/checkout.page';
+import SideBarPage from '../pageobjects/sidebar.page';
 
 describe('Problem user path testing', () => {
   beforeAll('Open browser', () => {
@@ -29,6 +30,23 @@ describe('Problem user path testing', () => {
     await expect(ProductPage.menuBtn).toBeClickable();
   });
 
+  it('Sidebar test', async () => {
+    await ProductPage.ShowSidebar();
+    await expect(SideBarPage.allItems).toBeDisplayed();
+    await expect(SideBarPage.allItems).toBeFocused();
+    await expect(SideBarPage.allItems).toBeClickable();
+    await expect(SideBarPage.about).toBeDisplayed();
+    await expect(SideBarPage.about).toBeClickable();
+    await expect(SideBarPage.about).toHaveHref('https://saucelabs.com/');
+    await expect(SideBarPage.logOut).toBeClickable();
+    await expect(SideBarPage.resetApp).toBeClickable();
+  });
+
+  it('Page should be refreshed', async () => {
+    await browser.refresh();
+    await browser.pause(800);
+  });
+
   it('Add a product to cart', async () => {
     await expect(ProductPage.addtocartBtn).toBeClickable();
   });
@@ -48,10 +66,6 @@ describe('Problem user path testing', () => {
 
   it('Cart link button is clickable', async () => {
     await expect(ProductPage.cartLink).toBeClickable();
-  });
-
-  it('Show sidebar', async () => {
-    await ProductPage.ShowSidebar();
   });
 
   it('Page should be refreshed', async () => {
@@ -77,31 +91,31 @@ describe('Problem user path testing', () => {
     await CartPage.checkoutBtn.click();
   });
 
-  //   it('Complete purchase, empty first name field', async () => {
-  //     await CheckoutPage.completePurchase('', 'landa', '3000');
-  //     await expect(CheckoutPage.errorContainer).toHaveText('Error: First Name is required');
-  //     await CheckoutPage.xBtn.click();
-  //     await CheckoutPage.cancelBtn.click();
-  //   });
+  it('Complete purchase, empty first name field', async () => {
+    await CheckoutPage.completePurchase('', 'landa', '3000');
+    await expect(CheckoutPage.errorContainer).toHaveText('Error: First Name is required');
+    await CheckoutPage.xBtn.click();
+    await CheckoutPage.cancelBtn.click();
+  });
 
-  //   it('Complete purchase, empty last name field', async () => {
-  //     await CartPage.checkoutBtn.click();
-  //     await CheckoutPage.completePurchase('lalo', '', '3000');
-  //     await expect(CheckoutPage.errorContainer).toHaveText('Error: Last Name is required');
-  //     await CheckoutPage.xBtn.click();
-  //     await CheckoutPage.cancelBtn.click();
-  //   });
+  it('Complete purchase, empty last name field', async () => {
+    await CartPage.checkoutBtn.click();
+    await CheckoutPage.completePurchase('lalo', '', '3000');
+    await expect(CheckoutPage.errorContainer).toHaveText('Error: Last Name is required');
+    await CheckoutPage.xBtn.click();
+    await CheckoutPage.cancelBtn.click();
+  });
 
-  //   it('Complete purchase, empty zip code field', async () => {
-  //     await CartPage.checkoutBtn.click();
-  //     await CheckoutPage.completePurchase('lalo', 'landa', '');
-  //     await expect(CheckoutPage.errorContainer).toHaveText('Error: Postal Code is required');
-  //     await CheckoutPage.xBtn.click();
-  //     await CheckoutPage.cancelBtn.click();
-  //   });
+  it('Complete purchase, empty zip code field', async () => {
+    await CartPage.checkoutBtn.click();
+    await CheckoutPage.completePurchase('lalo', 'landa', '');
+    await expect(CheckoutPage.errorContainer).toHaveText('Error: Postal Code is required');
+    await CheckoutPage.xBtn.click();
+    await CheckoutPage.cancelBtn.click();
+  });
 
-  //   it('Complete purchase', async () => {
-  //     await CartPage.checkoutBtn.click();
-  //     await CheckoutPage.completePurchase('juan', 'bonelli', '2900');
-  //   });
+  it('Complete purchase', async () => {
+    await CartPage.checkoutBtn.click();
+    await CheckoutPage.completePurchase('juan', 'bonelli', '2900');
+  });
 });

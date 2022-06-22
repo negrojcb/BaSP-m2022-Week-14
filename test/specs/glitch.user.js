@@ -2,6 +2,7 @@ import LoginPage from '../pageobjects/login.page';
 import ProductPage from '../pageobjects/products.page';
 import CartPage from '../pageobjects/cart.page';
 import CheckoutPage from '../pageobjects/checkout.page';
+import SideBarPage from '../pageobjects/sidebar.page';
 
 describe('Performance glitch user path testing', () => {
   beforeAll('Open browser', () => {
@@ -24,9 +25,21 @@ describe('Performance glitch user path testing', () => {
     await expect(ProductPage.inventoryList).toBeDisplayed();
   });
 
-  it('Burger menu is display and clickable', async () => {
-    await expect(ProductPage.menuBtn).toBeDisplayed();
-    await expect(ProductPage.menuBtn).toBeClickable();
+  // it('Burger menu is display and clickable', async () => {
+  //   await expect(ProductPage.menuBtn).toBeDisplayed();
+  //   await expect(ProductPage.menuBtn).toBeClickable();
+  // });
+
+  it('Sidebar test', async () => {
+    await ProductPage.ShowSidebar();
+    await expect(SideBarPage.allItems).toBeDisplayed();
+    await expect(SideBarPage.allItems).toBeFocused();
+    await expect(SideBarPage.allItems).toBeClickable();
+    await expect(SideBarPage.about).toBeDisplayed();
+    await expect(SideBarPage.about).toBeClickable();
+    await expect(SideBarPage.about).toHaveHref('https://saucelabs.com/');
+    await expect(SideBarPage.logOut).toBeClickable();
+    await expect(SideBarPage.resetApp).toBeClickable();
   });
 
   it('Add a product to cart', async () => {
@@ -45,9 +58,9 @@ describe('Performance glitch user path testing', () => {
     await expect(ProductPage.cartLink).toBeClickable();
   });
 
-  it('Show sidebar', async () => {
-    await ProductPage.ShowSidebar();
-  });
+  // it('Show sidebar', async () => {
+  //   await ProductPage.ShowSidebar();
+  // });
 
   it('Page should be refreshed', async () => {
     await browser.refresh();
