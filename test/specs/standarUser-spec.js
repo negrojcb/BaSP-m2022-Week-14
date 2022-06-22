@@ -51,17 +51,12 @@ describe('Standard user path testing', () => {
     await expect(ProductPage.menuBtn).toBeClickable();
   });
 
-  // it('Sidebar is displayed', async () => {
-  //   await expect(ProductPage.inventorySidebar).toBeDisplayed();
-  // });
-
   it('Add a product to cart', async () => {
     await expect(ProductPage.addtocartBtn).toBeClickable();
   });
 
   it('Product filter', async () => {
     await expect(ProductPage.productFilter).toBeDisplayed();
-    //await expect(ProductPage.productFilter).toBeClickable();
   });
 
   it('Page should be refreshed', async () => {
